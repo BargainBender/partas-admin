@@ -13,34 +13,45 @@ class LocationController extends Controller
      */
     public function indexAPI()
     {
-    $locations= Location::select('location','longtitude','latitude')->get();
-    return response()->json($locations);
+        $locations = Location::select('location', 'longtitude', 'latitude')->get();
+        return response()->json($locations);
     }
 
     public function index()
     {
-    $locations= Location::all();
-    return Inertia::render('Locations/List',['locations'=>$locations]);
+        $locations = Location::all();
+        return Inertia::render('Locations/List', ['locations' => $locations]);
     }
-
-
-
 
     public function create()
     {
-        return Inertia::render('Locations/Create');
+        return Inertia::render('Locations/Create', [
+            'error' => session('error')
+            ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store()
-    {
-        Location::create([
-            "location"=> Request::get("location"),
-        ]);
-        return to_route('locations')->with('success', 'New  created.');
+{
+    Request::validate([
+        "location" => 'required',
+    ]);
+
+    $existingLocation = Location::where('location', Request::get('location'))->first();
+
+    if ($existingLocation) {
+        $uniqueIdentifier = time();
+        return to_route('location.create')->with(['error' => $uniqueIdentifier . ': Location already exists.']);
     }
+
+    Location::create([
+        "location" => Request::get("location"),
+    ]);
+
+    return to_route('locations')->with('success', 'New location created.');
+}
 
     /**
      * Display the specified resource.
@@ -55,9 +66,8 @@ class LocationController extends Controller
      */
     public function edit()
     {
-
-        $location= Location::find(Request::get("id"));
-        return Inertia::render('Locations/Edit',['location'=>$location]);
+        $location = Location::find(Request::get("id"));
+        return Inertia::render('Locations/Edit', ['location' => $location]);
     }
 
     /**
@@ -66,14 +76,15 @@ class LocationController extends Controller
     public function update(Location $location)
     {
         Request::validate([
-            "location"=> 'required',
+            "location" => 'required',
         ]);
 
-        Location::where('id',$location->id)
-        ->update([
-            "location"=> Request::get("location"),
-        ]);
-        return to_route('locations')->with('success', 'location  Updated.');
+        Location::where('id', $location->id)
+            ->update([
+                "location" => Request::get("location"),
+            ]);
+
+        return to_route('locations')->with('success', 'Location updated.');
     }
 
     /**
