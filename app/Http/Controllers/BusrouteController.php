@@ -18,7 +18,9 @@ class BusrouteController extends Controller
 
     $busroutes = Busroute::all();
     return Inertia::render('Busroutes/List', [
-      'busroutes' => $busroutes
+      'busroutes' => $busroutes,
+      'success' => session('success'),
+      'delete' => session('delete')
     ]);
   }
 
@@ -47,15 +49,28 @@ class BusrouteController extends Controller
 
     if (Request::get('origin') == Request::get('destination')) {
       $uniqueIdentifier = time();
-      \error_log('NOT ALLOWED');
       return to_route('busroutes.create')->with('error', $uniqueIdentifier . ':Origin and destination cannot be the same.');
     }
+
+    if (Busroute::where('origin', Request::get('origin'))
+        ->where('destination', Request::get('destination'))
+        ->count() > 0) {
+          $uniqueIdentifier = time();
+          return to_route('busroutes.create')->with('error', $uniqueIdentifier . ':Route already exists.');
+    }
+
+    // if (Busroute::where('origin')->) {
+    //   $uniqueIdentifier = time();
+    //   return to_route('busroutes.create')->with('error', $uniqueIdentifier . ':Route already exists.');
+    // }
+
+
 
     Busroute::create([
       'origin' => Request::get('origin'),
       'destination' => Request::get('destination'),
     ]);
-    return to_route('busroutes')->with('success', 'New Route  created.');
+    return to_route('busroutes')->with('success', 'New Route created.');
   }
 
   /**
@@ -109,6 +124,7 @@ class BusrouteController extends Controller
   public function destroy(Busroute $busroute)
   {
     Busroute::destroy($busroute->id);
-    to_route('busroutes');
+    $uniqueIdentifier = time();
+    to_route('busroutes')->with('delete', $uniqueIdentifier . ':Deleted route.');
   }
 }

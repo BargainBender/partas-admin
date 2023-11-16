@@ -8,6 +8,11 @@ import PrimaryButton from '@/Components/PrimaryButton.vue'
 import InputLabel from '@/Components/InputLabel.vue';
 import TextInput from '@/Components/TextInput.vue';
 
+import { useToast } from 'vue-toast-notification';
+import 'vue-toast-notification/dist/theme-sugar.css';
+
+const $toast = useToast();
+
 const props = defineProps({
   busroute: Object,
   locations: Object,

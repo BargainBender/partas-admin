@@ -18,7 +18,8 @@ class BusController extends Controller
     $buses = Bus::all();
     return Inertia::render('Buses/List', [
       'buses' => $buses,
-      'success' => session('success')
+      'success' => session('success'),
+      'delete' => session('delete')
     ]);
   }
 
@@ -107,6 +108,7 @@ class BusController extends Controller
   public function destroy(Bus $bus)
   {
     Bus::destroy($bus->id);
-    to_route('busroutes');
+    $uniqueIdentifier = time();
+    to_route('busroutes')->with('delete', $uniqueIdentifier . ':Deleted bus.');
   }
 }

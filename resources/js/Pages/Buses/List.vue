@@ -1,4 +1,5 @@
 <script setup>
+import { watchEffect } from 'vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, Link, router } from '@inertiajs/vue3';
 import NavLink from '@/Components/NavLink.vue'
@@ -10,7 +11,8 @@ const $toast = useToast();
 
 const props = defineProps({
   buses: Object,
-  success: String
+  success: String,
+  delete: String
 })
 
 if (props.success) {
@@ -18,6 +20,14 @@ if (props.success) {
     'duration': 5000,
   });
 }
+
+watchEffect(() => {
+  if (props.delete) {
+    $toast.info(props.delete.split(':')[1], {
+      'duration': 5000,
+    });
+  }
+})
 
 function destroy(id) {
   if (confirm('Are you sure you want to delete this Bus Information?')) {

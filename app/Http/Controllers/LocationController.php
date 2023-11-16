@@ -20,7 +20,11 @@ class LocationController extends Controller
     public function index()
     {
         $locations = Location::all();
-        return Inertia::render('Locations/List', ['locations' => $locations]);
+        return Inertia::render('Locations/List', [
+          'locations' => $locations,
+          'success' => session('success'),
+          'delete' => session('delete')
+        ]);
     }
 
     public function create()
@@ -93,6 +97,7 @@ class LocationController extends Controller
     public function destroy(Location $location)
     {
         Location::destroy($location->id);
-        return to_route('locations');
+        $uniqueIdentifier = time();
+        return to_route('locations')->with('delete', $uniqueIdentifier . ':Deleted location.');
     }
 }
