@@ -3,10 +3,10 @@ import '../css/app.css';
 import 'flowbite';
 
 import { createApp, h } from 'vue';
-import ToastPlugin from 'vue-toast-notification';
 import { createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
+import ToastPlugin from 'vue-toast-notification';
 
 import 'vue-toast-notification/dist/theme-bootstrap.css';
 

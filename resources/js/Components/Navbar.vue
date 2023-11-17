@@ -25,7 +25,7 @@ const toggleDropdown = () => {
       <div class="relative inline-block text-left">
         <!-- Trigger button -->
         <button @click="toggleDropdown" type="button"
-          class="inline-flex justify-center items-center w-full px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:border-blue-300 focus:ring focus:ring-blue-200 active:bg-gray-200"
+          class="inline-flex justify-center items-center w-full px-2 py-1 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-full hover:bg-gray-50 focus:outline-none focus:border-blue-300 focus:ring focus:ring-blue-200 active:bg-gray-200"
           id="dropdown-button" aria-haspopup="true" aria-expanded="true">
           {{ $page.props.auth.user.name }}
           <!-- Dropdown icon -->

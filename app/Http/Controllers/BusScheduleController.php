@@ -28,7 +28,9 @@ class BusScheduleController extends Controller
                INNER JOIN buses on buses.id = bus_schedules.bus_id";
 
        $schedules= DB::select($query);
-       return Inertia::render('Schedules/List',['schedules'=>$schedules]);
+       return Inertia::render('Schedules/List',[
+        'schedules'=>$schedules
+      ]);
     }
 
     public function indexAPI()

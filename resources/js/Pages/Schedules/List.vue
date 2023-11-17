@@ -46,6 +46,7 @@ function destroy(id){
                                 <th class="px-4 py-3">Destination</th>
 
                                 <th class="px-4 py-3">Bus Type</th>
+                                <th class="px-4 py-3">Bus Code</th>
                                 <th class="px-4 py-3">Action</th>
 
                             </tr>
@@ -64,9 +65,11 @@ function destroy(id){
                                     <td >
                                     {{ schedule.destination }}
                                     </td>
-
                                     <td >
                                     {{ schedule.type }}
+                                    </td>
+                                    <td >
+                                    {{ schedule.code }}
                                     </td>
                                     <td class="flex">
                                         <Link :href="route('schedule.edit')"
