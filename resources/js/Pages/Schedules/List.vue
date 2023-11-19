@@ -1,11 +1,32 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, Link, router } from '@inertiajs/vue3';
+import { watchEffect } from 'vue';
 import NavLink from '@/Components/NavLink.vue'
 import PrimaryButton from '@/Components/PrimaryButton.vue'
+import { useToast } from 'vue-toast-notification';
+import 'vue-toast-notification/dist/theme-sugar.css';
 
-defineProps({
-    schedules: Object
+const $toast = useToast();
+
+const props = defineProps({
+    schedules: Object,
+    success: String,
+    delete: String
+})
+
+if (props.success) {
+  $toast.success(props.success, {
+    'duration': 5000,
+  });
+}
+
+watchEffect(() => {
+  if (props.delete) {
+    $toast.info(props.delete.split(':')[1], {
+      'duration': 5000,
+    });
+  }
 })
 
 function destroy(id){

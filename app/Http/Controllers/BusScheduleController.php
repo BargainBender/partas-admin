@@ -29,7 +29,9 @@ class BusScheduleController extends Controller
 
        $schedules= DB::select($query);
        return Inertia::render('Schedules/List',[
-        'schedules'=>$schedules
+        'schedules'=>$schedules,
+        'success' => session('success'),
+        'delete' => session('delete')
       ]);
     }
 
@@ -69,7 +71,7 @@ class BusScheduleController extends Controller
             "price"=> Request::get("price"),
 
         ]);
-        return to_route('schedules')->with('success', 'New  created.');
+        return to_route('schedules')->with('success', 'New schedule created.');
 
     }
 
@@ -130,7 +132,8 @@ class BusScheduleController extends Controller
     {
 
         BusSchedule::destroy($busSchedule->id);
-        return to_route('schedules');
+        $uniqueIdentifier = time();
+        return to_route('schedules')->with('delete', $uniqueIdentifier . ':Deleted schedule.');
     }
 
     public function reserve_schedule(BusSchedule $busSchedule){
