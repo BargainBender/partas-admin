@@ -87,7 +87,7 @@ function destroy(id) {
                       {{ bus.capacity }}
                     </td>
                     <td class="flex ">
-                      <Link :href="route('bus.edit')"
+                      <Link :href="route('bus.edit')" title="Edit Bus"
                         class="flex items-center bg-blue-500 hover:bg-blue-700 text-white font-semibold px-3 py-2 m-2 rounded"
                         :data="{ id: bus.id }" as="button">
                       <i class="fa-solid fa-pen-to-square"></i>
