@@ -22,7 +22,7 @@ defineProps({
         <div class="flex items-center justify-between">
                 <div class="flex items-center justify-start">
                     <Link href="/" class="flex ml-2 md:mr-24">
-                    <img src="/partas_logo.png" class="h-8 mr-3" alt="FlowBite Logo" />
+                    <img src="/partas_logo.png" class="h-8 mr-3" alt="Logo" />
                     <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">Partas Bus Inc</span>
                     </Link>
                     <span class="self-center text-xl text-green-800 font-semibold sm:text-2xl whitespace-nowrap dark:text-white">Ticket Reservation System</span>
