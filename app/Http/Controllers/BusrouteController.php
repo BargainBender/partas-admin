@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Busroute;
+use App\Models\Updates;
 use App\Http\Requests\UpdateBusrouteRequest;
 use App\Models\Location;
 use Illuminate\Support\Facades\Request;
@@ -15,7 +16,6 @@ class BusrouteController extends Controller
    */
   public function index()
   {
-
     $busroutes = Busroute::all();
     return Inertia::render('Busroutes/List', [
       'busroutes' => $busroutes,
@@ -70,6 +70,9 @@ class BusrouteController extends Controller
       'origin' => Request::get('origin'),
       'destination' => Request::get('destination'),
     ]);
+    Updates::create([
+      "message" => "Route created: ".Request::get('origin')." → ".Request::get('destination')."."
+    ]);
     return to_route('busroutes')->with('success', 'New Route created.');
   }
 
@@ -110,6 +113,9 @@ class BusrouteController extends Controller
       return redirect('busroutes.edit')->with('error', $uniqueIdentifier . ':Origin and destination cannot be the same.');
     }
 
+    Updates::create([
+      "message" => "Route updated: ".$busroute->origin." → ".$busroute->destination." to ".Request::get('origin')." → ".Request::get('destination')."."
+    ]);
     Busroute::where('id', $busroute->id)
       ->update([
         'origin' => Request::get('origin'),
@@ -123,6 +129,9 @@ class BusrouteController extends Controller
    */
   public function destroy(Busroute $busroute)
   {
+    Updates::create([
+      "message" => "Route deleted: ".$busroute->origin." → ".$busroute->destination."."
+    ]);
     Busroute::destroy($busroute->id);
     $uniqueIdentifier = time();
     to_route('busroutes')->with('delete', $uniqueIdentifier . ':Deleted route.');

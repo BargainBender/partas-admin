@@ -9,6 +9,8 @@ use App\Models\Bus;
 use App\Models\Busroute;
 use App\Models\Reservation;
 use App\Models\User;
+use App\Models\Updates;
+use DateTime;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request;
 use Inertia\Inertia;
@@ -63,7 +65,7 @@ class BusScheduleController extends Controller
      */
     public function store()
     {
-        BusSchedule::create([
+        $schedule = BusSchedule::create([
             "arrival_time"=> Request::get("arrival_time"),
             "departure_time"=> Request::get("departure_time"),
             "route_id"=> Request::get("route_id"),
@@ -71,8 +73,14 @@ class BusScheduleController extends Controller
             "price"=> Request::get("price"),
 
         ]);
+        $bus = Bus::find(Request::get("bus_id"));
+        $route = Busroute::find(Request::get("route_id"));
+        $departureFormat = (new DateTime($schedule->departure_time))->format('d/m/y H:i A');
+        $arrivalFormat = (new DateTime($schedule->arrival_time))->format('d/m/y H:i A');
+        Updates::create([
+          "message" => "Schedule created: ".$departureFormat." → ".$arrivalFormat.", ".$route->origin." → ".$route->destination.", ".$bus->code
+        ]);
         return to_route('schedules')->with('success', 'New schedule created.');
-
     }
 
     /**
@@ -113,13 +121,25 @@ class BusScheduleController extends Controller
             "route_id"=> 'required',
             "bus_id"=> 'required'
         ]);
-
+        $bus = Bus::find($busSchedule->bus_id);
+        $route = Busroute::find($busSchedule->route_id);
+        $departureFormat = (new DateTime($busSchedule->departure_time))->format('d/m/y H:i A');
+        $arrivalFormat = (new DateTime($busSchedule->arrival_time))->format('d/m/y H:i A');
+        
         BusSchedule::where('id',$busSchedule->id)
         ->update([
-            "arrival_time"=> Request::get("arrival_time"),
-            "departure_time"=> Request::get("departure_time"),
-            "route_id"=> Request::get("route_id"),
-            "bus_id"=> Request::get("bus_id")
+          "arrival_time"=> Request::get("arrival_time"),
+          "departure_time"=> Request::get("departure_time"),
+          "route_id"=> Request::get("route_id"),
+          "bus_id"=> Request::get("bus_id")
+        ]);
+        $newBus = Bus::find(Request::get("bus_id"));
+        $newRoute = Busroute::find(Request::get("route_id"));
+        $newDepartureFormat = (new DateTime(Request::get("departure_time")))->format('d/m/y H:i A');
+        $newArrivalFormat = (new DateTime(Request::get("arrival_time"),))->format('d/m/y H:i A');
+        Updates::create([
+          "message" => "Schedule updated: ".$departureFormat." → ".$arrivalFormat.", ".$route->origin." → ".$route->destination.", ".$bus->code." now  updated to ".
+          $newDepartureFormat." → ".$newArrivalFormat.", ".$newRoute->origin." → ".$newRoute->destination.", ".$newBus->code
         ]);
         return to_route('schedules')->with('success', 'Schedule  Updated.');
 
@@ -130,8 +150,14 @@ class BusScheduleController extends Controller
      */
     public function destroy(BusSchedule $busSchedule)
     {
-
+        $bus = Bus::find($busSchedule->bus_id);
+        $route = Busroute::find($busSchedule->route_id);
+        $departureFormat = (new DateTime($busSchedule->departure_time))->format('d/m/y H:i A');
+        $arrivalFormat = (new DateTime($busSchedule->arrival_time))->format('d/m/y H:i A');
         BusSchedule::destroy($busSchedule->id);
+        Updates::create([
+          "message" => "Schedule deleted: ".$departureFormat." → ".$arrivalFormat.", ".$route->origin." → ".$route->destination.", ".$bus->code
+        ]);
         $uniqueIdentifier = time();
         return to_route('schedules')->with('delete', $uniqueIdentifier . ':Deleted schedule.');
     }

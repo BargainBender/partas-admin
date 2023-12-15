@@ -26,7 +26,7 @@ class BusSchedule extends Model
 
     public function route()
     {
-        return $this->belongsTo(Route::class);
+        return $this->belongsTo(Busroute::class);
     }
 
     public function reservations()

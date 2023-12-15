@@ -65,7 +65,7 @@ function submit() {
               </div>
               <div class="block w-full">
                 <!-- <TextInput id="departure_time" type="datetime-local" v-model="form.departure_time" required /> -->
-                <VueDatePicker v-model="form.departure_time_input" model-type="timestamp" :required="true" :is24="false" :min-date="new Date()" :max-date="form.arrival_time_input" :max-time="form.arrival_time_input"/>
+                <VueDatePicker v-model="form.departure_time_input" model-type="timestamp" :required="true" :is24="false" :min-date="new Date()" :max-date="form.arrival_time_input"/>
                 <!-- yyyy-MM-ddThh:mm -->
               </div>
               <div>
@@ -73,7 +73,7 @@ function submit() {
               </div>
               <div class="block w-full">
                 <!-- <TextInput  id="arrival_time"  type="datetime-local" v-model="form.arrival_time" required /> -->
-                <VueDatePicker v-model="form.arrival_time_input" model-type="timestamp" :required="true" :is24="false" :min-date="form.departure_time_input || new Date()" :min-time="form.departure_time_input"/>
+                <VueDatePicker v-model="form.arrival_time_input" model-type="timestamp" :required="true" :is24="false" :min-date="form.departure_time_input || new Date()"/>
 
               </div>
               <div>
