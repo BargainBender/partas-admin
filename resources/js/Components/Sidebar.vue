@@ -13,7 +13,7 @@ function toggleDrawer() {
             <li class="w-full">
                 <button @click="toggleDrawer()" :class="['w-full transition flex items-start py-3 pl-5', store.drawerOpened ? '' : 'pr-3']">
                     <v-icon name="fa-chevron-right" scale="2" :class="['transition', store.drawerOpened ? 'rotate-180 -translate-x-1' : '']"/>
-                </button>
+                </button>  
             </li>
             <DrawerItem icon="ri-dashboard-3-fill" label="Dashboard" href="/dashboard" :current="route().current() === 'dashboard'"/>
             <DrawerItem icon="fa-bus" label="Bus Management" href="/buses" :current="route().current() === 'buses'"/>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Location;
+use App\Models\Updates;
 use Illuminate\Support\Facades\Request;
 use Inertia\Inertia;
 
@@ -53,6 +54,9 @@ class LocationController extends Controller
     Location::create([
         "location" => Request::get("location"),
     ]);
+    Updates::create([
+      "message" => "Location created: ".Request::get('location')."."
+    ]);
 
     return to_route('locations')->with('success', 'New location created.');
 }
@@ -83,10 +87,14 @@ class LocationController extends Controller
             "location" => 'required',
         ]);
 
+        Updates::create([
+          "message" => "Location updated: ".$location->location." to ".Request::get('location')."."
+        ]);
         Location::where('id', $location->id)
             ->update([
                 "location" => Request::get("location"),
             ]);
+        
 
         return to_route('locations')->with('success', 'Location updated.');
     }
@@ -96,6 +104,9 @@ class LocationController extends Controller
      */
     public function destroy(Location $location)
     {
+        Updates::create([
+          "message" => "Location deleted: ".$location->location."."
+        ]);
         Location::destroy($location->id);
         $uniqueIdentifier = time();
         return to_route('locations')->with('delete', $uniqueIdentifier . ':Deleted location.');

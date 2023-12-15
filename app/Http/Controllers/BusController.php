@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bus;
+use App\Models\Updates;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Request;
 
@@ -52,6 +53,9 @@ class BusController extends Controller
         'type' => Request::get('type'),
         'capacity' => Request::get('capacity'),
       ]);
+      Updates::create([
+        "message" => "Bus Created: ".Request::get('code')." (".Request::get('type').")."
+      ]);
       return redirect()->route('buses')->with('success', 'New Bus created.');
     } catch (QueryException $e) {
       // Handle the error
@@ -99,6 +103,9 @@ class BusController extends Controller
         'type' => Request::get('type'),
         'capacity' => Request::get('capacity'),
       ]);
+    Updates::create([
+        "message" => "Bus updated: ".Request::get('code')." (".Request::get('type').")."
+      ]);
     return to_route('buses')->with('success', 'Route  edited.');
   }
 
@@ -107,6 +114,9 @@ class BusController extends Controller
    */
   public function destroy(Bus $bus)
   {
+    Updates::create([
+      "message" => "Bus deleted: ".$bus->code." (".$bus->type.")."
+    ]);
     Bus::destroy($bus->id);
     $uniqueIdentifier = time();
     to_route('busroutes')->with('delete', $uniqueIdentifier . ':Deleted bus.');
