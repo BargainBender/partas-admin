@@ -5,6 +5,9 @@ import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
+import ReCaptcha from '@/Components/ReCaptcha.vue'
+import { store } from '@/recaptcha'
+import { watchEffect, ref } from 'vue'
 
 const form = useForm({
     name: '',
@@ -12,6 +15,18 @@ const form = useForm({
     password: '',
     password_confirmation: '',
 });
+
+const formCompleteAndValid = ref(false)
+
+watchEffect(() => {
+    formCompleteAndValid.value = store.recaptchaVerified &&
+                        form.name.trim().length !== 0 &&
+                        form.email.trim().length !== 0 &&
+                        form.password.trim().length !== 0 &&
+                        form.password_confirmation.trim().length !== 0
+})
+
+
 
 const submit = () => {
     form.post(route('register'), {
@@ -85,10 +100,16 @@ const submit = () => {
 
                 <InputError class="mt-2" :message="form.errors.password_confirmation" />
             </div>
+            
+            <ReCaptcha/>
 
             <div class="flex flex-col items-end justify-end mt-8 mb-4">
 
-                <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                <PrimaryButton class="ml-4" :class="{ 
+                    'opacity-25': !formCompleteAndValid,
+                    'cursor-not-allowed': !formCompleteAndValid,
+                    }" 
+                    :disabled="!formCompleteAndValid">
                     Register
                 </PrimaryButton>
 
