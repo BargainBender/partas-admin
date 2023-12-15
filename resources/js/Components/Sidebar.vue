@@ -11,7 +11,7 @@ function toggleDrawer() {
     <div :class="['transition-[width] sticky top-0 h-screen bg-base-100 flex flex-col justify-between items-center', store.drawerOpened ? 'w-[280px]' : 'w-[80px]']">
         <ul class="flex flex-col justify-between items-start w-full">
             <li class="w-full">
-                <button @click="toggleDrawer()" :class="['w-full transition flex items-start hover:bg-blue-100 hover:text-base-100 py-3 pl-5', store.drawerOpened ? '' : 'pr-3']">
+                <button @click="toggleDrawer()" :class="['w-full transition flex items-start py-3 pl-5', store.drawerOpened ? '' : 'pr-3']">
                     <v-icon name="fa-chevron-right" scale="2" :class="['transition', store.drawerOpened ? 'rotate-180 -translate-x-1' : '']"/>
                 </button>
             </li>
