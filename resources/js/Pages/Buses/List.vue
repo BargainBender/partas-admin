@@ -45,7 +45,7 @@ function destroy(id) {
 
     <div class="py-12">
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+        <div class="bg-base-100 overflow-hidden shadow-sm sm:rounded-lg">
           <div class="p-3 ">
             <Link :href="route('bus.create')"
               class="flex items-center bg-blue-500 hover:bg-blue-700 text-white font-semibold px-3 py-2 rounded mx-2"
@@ -59,12 +59,12 @@ function destroy(id) {
           </div>
 
 
-          <div class="p-6 text-gray-900">
+          <div class="p-6 text-gray-900 ">
             <div class="overflow-x-auto w-full">
               <table class="w-full whitespace-no-wrap">
                 <thead>
                   <tr
-                    class="text-xs font-semibold TableRowacking-wide text-left text-gray-500 uppercase bg-gray-50 border-b">
+                    class="text-xs font-semibold TableRowacking-wide text-left text-white uppercase bg-base-100 ">
                     <th class="px-4 py-3">code</th>
                     <th class="px-4 py-3">type</th>
                     <th class="px-4 py-3">capacity</th>
@@ -74,9 +74,9 @@ function destroy(id) {
 
                   </tr>
                 </thead>
-                <tbody class="bg-white divide-y">
+                <tbody class="">
                   <tr v-for="bus in buses" :key="bus.id"
-                    class="border-b transition duration-300 ease-in-out hover:bg-neutral-300 dark:border-neutral-500 dark:hover:bg-neutral-600">
+                    class="transition duration-300 ease-in-out bg-base-100 text-white hover:bg-neutral  dark:hover:bg-neutral-600">
                     <td>
                       {{ bus.code }}
                     </td>

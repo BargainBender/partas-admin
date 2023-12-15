@@ -25,9 +25,9 @@ const form = useForm({
 <template>
     <section>
         <header>
-            <h2 class="text-lg font-medium text-gray-900">Profile Information</h2>
+            <h2 class="text-lg font-medium text-white">Profile Information</h2>
 
-            <p class="mt-1 text-sm text-gray-600">
+            <p class="mt-1 text-sm text-white ">
                 Update your account's profile information and email address.
             </p>
         </header>
@@ -39,14 +39,14 @@ const form = useForm({
                 <TextInput
                     id="name"
                     type="text"
-                    class="mt-1 block w-full"
+                    class="mt-1 bg-base-100 block w-full"
                     v-model="form.name"
                     required
                     autofocus
                     autocomplete="name"
                 />
 
-                <InputError class="mt-2" :message="form.errors.name" />
+                <InputError class="mt-2 " :message="form.errors.name" />
             </div>
 
             <div>
@@ -55,7 +55,7 @@ const form = useForm({
                 <TextInput
                     id="email"
                     type="email"
-                    class="mt-1 block w-full"
+                    class="mt-1 bg-base-100 block w-full"
                     v-model="form.email"
                     required
                     autocomplete="username"
@@ -65,7 +65,7 @@ const form = useForm({
             </div>
 
             <div v-if="mustVerifyEmail && user.email_verified_at === null">
-                <p class="text-sm mt-2 text-gray-800">
+                <p class="text-sm mt-2 text-gray-800 bg-base-100">
                     Your email address is unverified.
                     <Link
                         :href="route('verification.send')"

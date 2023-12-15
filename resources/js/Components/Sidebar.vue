@@ -22,7 +22,7 @@ function toggleDrawer() {
             <DrawerItem icon="fa-map-marked" label="Location Management" href="/locations" :current="route().current() === 'locations'"/>
         </ul>
         <ul class="flex flex-col justify-between items-start w-full">
-            <DrawerItem icon="bi-gear-wide-connected" label="Settings" href="/profile" :current="route().current() === 'profile.edit'"/>
+            <DrawerItem icon="bi-gear-wide-connected" label="Profile Settings" href="/profile" :current="route().current() === 'profile.edit'"/>
             <DrawerItem icon="io-exit" fill="#df5342" class="pl-6" label="Log out" :href="route('logout')" method="POST"/>
         </ul>
     </div>

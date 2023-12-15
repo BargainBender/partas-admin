@@ -15,24 +15,24 @@ defineProps({
 
 
 <template>
-<nav class="bg-gradient-to-b from-green-400 to-blue-400
-            fixed top-0 z-50 w-full bg-white border-b border-gray-200
+<div class="bg-image-full">
+<nav class="bg-base-100 border-gray-200
             dark:bg-gray-800 dark:border-gray-700">
   <div class="px-3 py-3 lg:px-5 lg:pl-3">
         <div class="flex items-center justify-between">
                 <div class="flex items-center justify-start">
                     <Link href="/" class="flex ml-2 md:mr-24">
-                    <img src="/partas_logo.png" class="h-8 mr-3" alt="Logo" />
-                    <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">Partas Bus Inc</span>
+                    <img src="logo.png" class="h-8 mr-3" alt="Logo" />
+                    <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">Luzon Link Liner</span>
                     </Link>
-                    <span class="self-center text-xl text-green-800 font-semibold sm:text-2xl whitespace-nowrap dark:text-white">Ticket Reservation System</span>
+                    <span class="self-center text-xl text-white-500 font-semibold sm:text-2xl whitespace-nowrap dark:text-white">Ticket Reservation System</span>
                 </div>
                 <div class="flex items-center">
                         <div v-if="canLogin" class="sm:fixed sm:top-0 sm:right-0 p-6 text-right">
                                 <Link
                                     v-if="$page.props.auth.user"
                                     :href="route('dashboard')"
-                                    class="font-semibold text-2xl text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+                                    class="font-semibold text-2xl  bg-base-100 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
                                     >Dashboard</Link
                                 >
 
@@ -68,34 +68,19 @@ defineProps({
         </div>
   </div>
 </nav>
-
-<div class="p-6 dark:border-gray-700 bg-blue-400">
-    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-        <div>
-            <img class="h-auto max-w-full rounded-lg" src="https://placehold.co/800?text=Image+1&font=roboto" alt="">
-        </div>
-        <div>
-            <img class="h-auto max-w-full rounded-lg" src="https://placehold.co/800?text=Image+2&font=roboto" alt="">
-        </div>
-        <div>
-            <img class="h-auto max-w-full rounded-lg" src="https://placehold.co/800?text=Image+3&font=roboto" alt="">
-        </div>
-        <div>
-            <img class="h-auto max-w-full rounded-lg" src="https://placehold.co/800?text=Image+4&font=roboto" alt="">
-        </div>
-        <div>
-            <Carousel />
-        </div>
-        <div>
-            <img class="h-auto max-w-full rounded-lg" src="https://placehold.co/800?text=Image+1&font=roboto" alt="">
-        </div>
-
-    </div>
 </div>
 
 </template>
 
 <style>
 
+.bg-image-full {
+  /* Set the background image and style properties */
+  background-image: url('/bus.jpeg'); /* Replace with the actual image path */
+  background-size: cover; /* Cover the entire container */
+  background-position: center; /* Center the background image */
+  height: 100vh; /* Set the height to the full viewport height */
+  width: 100%; /* Set the width to 100% of the container */
+}
 
 </style>

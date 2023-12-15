@@ -46,7 +46,7 @@ function destroy(id){
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="bg-base-100 overflow-hidden shadow-sm sm:rounded-lg">
                   <div class="p-3 ">
                     <Link :href="route('location.create')" class="flex items-center bg-blue-500 hover:bg-blue-700 text-white font-semibold px-3 py-2 rounded mx-2" as="button">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
@@ -61,13 +61,13 @@ function destroy(id){
                         <div class="overflow-x-auto w-full">
                             <table class="w-full whitespace-no-wrap">
                             <thead>
-                            <tr class="text-xs font-semibold TableRowacking-wide text-left text-gray-500 uppercase bg-gray-50 border-b">
+                            <tr class="text-xs font-semibold TableRowacking-wide text-left text-white uppercase bg-base-100 ">
                                 <th class="px-4 py-3">Location</th>
                                 <th class="px-4 py-3" colspan="2">Actions</th>
                             </tr>
                             </thead>
-                            <tbody class="bg-white divide-y" >
-                                <tr v-for="location in locations" :key="location.id" class="border-b transition duration-300 ease-in-out hover:bg-neutral-300 dark:border-neutral-500 dark:hover:bg-neutral-600" >
+                            <tbody class="bg-base-100  " >
+                                <tr v-for="location in locations" :key="location.id" class="transition duration-300 ease-in-out text-white hover:bg-neutral dark: bg-base-100 dark:hover:bg-base-100" >
                                     <td>
                                     {{ location.location }}
                                     </td>

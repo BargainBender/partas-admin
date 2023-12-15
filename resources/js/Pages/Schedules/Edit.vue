@@ -67,7 +67,7 @@ function update() {
 
     <div class="py-12">
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div class="ma-8 w-100  bg-red-200 rounded-lg border shadow-xs">
+        <div class="ma-8 w-100 bg-base-100 rounded-lg">
           <div class="mx-8 ">
             <form @submit.prevent="update">
               <div class="md:w-1/3">
