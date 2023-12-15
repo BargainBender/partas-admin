@@ -69,7 +69,7 @@ defineProps({
   </div>
 </nav>
 
-<div class="p-6 dark:border-gray-700 mt-14 bg-blue-400">
+<div class="p-6 dark:border-gray-700 bg-blue-400">
     <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
         <div>
             <img class="h-auto max-w-full rounded-lg" src="https://placehold.co/800?text=Image+1&font=roboto" alt="">

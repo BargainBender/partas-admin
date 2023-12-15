@@ -7,6 +7,29 @@ import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
 import ToastPlugin from 'vue-toast-notification';
 
+import { OhVueIcon, addIcons } from "oh-vue-icons";
+import { 
+    FaChevronRight,
+    BiCalendarWeekFill,
+    RiDashboard3Fill,
+    FaBus,
+    RiPinDistanceFill,
+    FaMapMarked,
+    BiGearWideConnected,
+    IoExit
+} from "oh-vue-icons/icons";
+
+addIcons(
+    FaChevronRight,
+    RiDashboard3Fill,
+    FaBus,
+    RiPinDistanceFill,
+    BiCalendarWeekFill,
+    FaMapMarked,
+    BiGearWideConnected,
+    IoExit
+)
+
 import 'vue-toast-notification/dist/theme-bootstrap.css';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
@@ -18,6 +41,7 @@ createInertiaApp({
     return createApp({ render: () => h(App, props) })
       .use(plugin)
       .use(ToastPlugin)
+      .component("v-icon", OhVueIcon)
       .use(ZiggyVue, Ziggy)
       .mount(el);
   },

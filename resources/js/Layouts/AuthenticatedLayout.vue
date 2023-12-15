@@ -1,31 +1,19 @@
 <script setup>
-import {ref} from 'vue';
-import ApplicationLogo from '@/Components/ApplicationLogo.vue';
-import Dropdown from '@/Components/Dropdown.vue';
-import DropdownLink from '@/Components/DropdownLink.vue';
-import NavLink from '@/Components/NavLink.vue';
-import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
-import { Link } from '@inertiajs/vue3';
 import Sidebar from '@/Components/Sidebar.vue'
-import Navbar from '@/Components/Navbar.vue'
+
 defineProps({
     count_reservation: Number
 })
+
+import {store} from '@/store'
 
 </script>
 
 <template>
     <div>
-        <div class="min-h-screen bg-gray-100">
-            <Navbar/>
+        <div :class="['transition-[grid] min-h-screen h-full bg-base-300 grid', store.drawerOpened ? 'grid-cols-[280px_1fr]' : 'grid-cols-[80px_1fr]']">
             <Sidebar/>
-            <main class="bg-blue-400 shadow">
-                <div class="p-4 sm:ml-64">
-                    <div class="p-4 mt-14">
-                        <slot/>
-                    </div>
-                </div>
-            </main>
+            <slot />
         </div>
     </div>
 </template>
